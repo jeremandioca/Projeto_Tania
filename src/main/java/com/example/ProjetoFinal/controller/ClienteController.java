@@ -1,7 +1,7 @@
 package com.example.ProjetoFinal.controller;
 
 import com.example.ProjetoFinal.model.Cliente;
-import com.example.ProjetoFinal.repository.ClienteRepository;
+import com.example.ProjetoFinal.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,51 +13,51 @@ import java.util.Optional;
 public class ClienteController {
 
     @Autowired
-    ClienteRepository clrepo;
+    Repository clorepo;
 
     @PostMapping("/cadastrar")
-    public void cadastrarCliente(@RequestBody Cliente cl ){
-        clrepo.save(cl);
+    public void cadastrarCliente(@RequestBody Cliente clo ){
+        clorepo.save(clo);
     }
 
     @GetMapping("/todos")
     public List<Cliente> buscarTodosClientes(){
-      return clrepo.findAll();
+      return clorepo.findAll();
     }
 
     @GetMapping("/todos/codigo/{codigo}")
     public Optional<Cliente> buscarPorCodigo(@PathVariable("codigo") int codigo){
-        return clrepo.findById(codigo);
+        return clorepo.findById(codigo);
     }
 
 @GetMapping("/todos/inicialnome/{nome}")
     public List<Cliente> buscarPorInicialNome(@PathVariable("nome") String nome){
-        return clrepo.findByInicialNome(nome);
+        return clorepo.findByInicialNome(nome);
 }
 
 @GetMapping("/todos/email/{email}")
     public List<Cliente> buscarPorEmail(@PathVariable("email") String email){
-        return clrepo.findByEmail(email);
+        return clorepo.findByEmail(email);
 }
 
 @GetMapping("/todos/nomeemail/{nome}/{email}")
     public List<Cliente> buscarPorNomeEmail(@PathVariable("nome") String nome, @PathVariable("email") String email){
-        return clrepo.findByNomeEmail(nome, email);
+        return clorepo.findByNomeEmail(nome, email);
 }
 
 @DeleteMapping("/remover")
     public void removerCliente(@RequestBody Cliente cl){
-        clrepo.delete(cl);
+        clorepo.delete(cl);
 }
 
 @DeleteMapping("/remover/codigo/{codigo}")
     public void removerClientePorCodigo(@PathVariable("codigo") int codigo){
-        clrepo.deleteById(codigo);
+        clorepo.deleteById(codigo);
 }
 
 @PutMapping("/atualizar")
     public void atualizarCliente(@RequestBody Cliente cl){
-        clrepo.save(cl);
+        clorepo.save(cl);
 }
 
 }
